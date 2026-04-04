@@ -1,10 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Hello World Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joseph H. Polsky — Resume</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1>Hello World!</h1>
-    <p>This is a simple "Hello World" webpage.</p>
+
+  <div id="header"></div>
+  <div class="left"></div>
+
+  <div class="stuff">
+    <br /><br />
+    <h1>Resume</h1>
+    <h2>Joseph H. Polsky</h2>
+    <p>20 Halletts Point Apt 611 &bull; Astoria NY, 11102 &bull; <a href="mailto:jhpolsky@gmail.com">jhpolsky@gmail.com</a> &bull; (585) 750-1946</p>
+    <hr />
+
+    <p class="head">Summary</p>
+    <p>
+      Software Engineer in Test with experience in API testing, automation frameworks, and CI/CD in healthcare and
+      financial systems. Strong background in JavaScript and Python, with hands-on experience testing FHIR/HL7 data
+      pipelines and high-throughput imaging systems.
+    </p>
+
+    <p class="head">Key Skills</p>
+    <ul>
+      <li><strong>Programming:</strong> Python, C#, Java, JavaScript, Selenium, Cypress, WebdriverIO, HTML/CSS, PHP, k6, Docker</li>
+      <li><strong>Databases:</strong> PostgreSQL, Oracle, MSSQL, MongoDB</li>
+      <li><strong>CI/CD &amp; Cloud:</strong> GitHub Actions, Azure Cloud, Azure DevOps (ADO), Azure Pipelines, Terraform</li>
+      <li><strong>API Governance:</strong> REST, SOAP, Microservices, GraphQL, Postman, Newman</li>
+      <li><strong>Quality Expertise:</strong> Performance, Load, Regression, Integration, Functional Testing</li>
+      <li><strong>Leadership:</strong> Team leadership, best practices establishment, cross-functional &amp; client collaboration</li>
+      <li><strong>Multilingual:</strong> Proficient in Spanish and Hebrew</li>
+      <li>Machine Learning Professional Certificate with eCornell (In Progress 2026)</li>
+    </ul>
+
+    <p class="head">Education</p>
+    <ul>
+      <li><strong>Cornell University</strong>, Ithaca NY &mdash; Bachelor of Science, Minor in Information Science</li>
+    </ul>
+
+    <p class="head">Relevant Experience</p>
+
+    <ul>
+      <li>
+        <strong>Memorial Sloan Kettering Cancer Center</strong>, New York, NY
+        <span style="float:right;">June 2022 &ndash; Present</span><br />
+        <em>Software Engineer II | Software Engineer I</em>
+        <ul>
+          <li>Built a Python-based tool to generate HL7 metadata files and load test digital pathology image pipelines, supporting high-throughput clinical imaging workflows</li>
+          <li>Developed test automation for LLM-extracted data from clinical EDC systems, ensuring accuracy, consistency, and alignment with downstream FHIR/HL7 data models</li>
+          <li>Developed and containerized test automation with Docker for FHIR/HL7 clinical trial data to ensure integrity and consistency across research systems</li>
+          <li>Spearheaded automated RESTful API and microservice testing to support clinical research workflows</li>
+          <li>Designed and implemented CI/CD workflows using Azure DevOps and GitHub Actions to automate test execution</li>
+          <li>Sped up testing and improved quality with UI and integration test frameworks to support coordinators accessing trial data</li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Allvue Systems (Formerly Black Mountain Systems)</strong>, New York, NY
+        <span style="float:right;">March 2018 &ndash; June 2022</span><br />
+        <em>QA Engineer II | QA Engineer I | QA Analyst I | Implementations QA Analyst</em>
+        <ul>
+          <li>Envisioned and implemented test frameworks for API and UI using RestSharp and Cypress, respectively</li>
+          <li>Led a team including offshore analysts responsible for writing and maintaining UI tests with Selenium and Cucumber</li>
+          <li>Produced hackathon award-winning project for JavaScript-based end-user tutorials</li>
+          <li>Boosted client relations by raising quality and establishing best practices as co-founder of the QA team</li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Major League Baseball Advanced Media</strong>, New York, NY
+        <span style="float:right;">Nov 2015 &ndash; March 2018</span><br />
+        <em>QA Lead | QA Analyst | QA Intern</em>
+        <ul>
+          <li>Led QA of the Electronic Baseball Information System modules for trades, scholarship plans, and Rule 5 draft</li>
+          <li>Expanded the team's Selenium WebDriver Java framework and aided regular maintenance</li>
+          <li>Deployed the trade and scholarship modules (CEP.mlb.com), and received unanimous positive end-user feedback</li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Perion Inc.</strong>, Ramat Gan, Israel
+        <span style="float:right;">September 2012 &ndash; January 2013</span><br />
+        <em>QA Intern</em>
+        <ul>
+          <li>Led acceptance testing for database and API-change releases</li>
+          <li>Extensively tested Point of Sale in various environments, currencies, and nationality configurations</li>
+          <li>Thoroughly documented requirements and test plans for UI, API and database functional testing</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p class="head">Visitor Count</p>
+    <p>You are visitor number: <span id="counter">&mdash;</span></p>
+
+    <br /><br />
+  </div>
+
+  <div class="right"></div>
+
+  <div id="footer">
+    <h2 id="name">Joseph H. Polsky</h2>
+  </div>
+
 </body>
 </html>
