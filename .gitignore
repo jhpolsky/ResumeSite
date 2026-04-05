@@ -2,3 +2,4 @@
 *.docx
 PROGRESS.md
 CLAUDE.md
+*/.aws-sam/*
