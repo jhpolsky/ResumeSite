@@ -15,7 +15,9 @@ def lambda_handler(event, context):
     )
     return {
         'headers': {
-            'Access-Control-Allow-Origin': 'https://jhpolsky.com'
+            'Access-Control-Allow-Origin': 'https://jhpolsky.com',
+            'Access-Control-Allow-Methods': 'GET',
+            'Access-Control-Allow-Headers': 'Content-Type'
         },
         'statusCode': 200,
         'body': json.dumps(int(response['Attributes']['count']))
