@@ -6,13 +6,21 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: lambda_function.lambda_handler
-      Runtime: python 3.12
+      Runtime: python3.12
       CodeUri: ./
+      Events:
+        VisitorCountApi:
+          Type: HttpApi
+          Properties:
+            Method: GET
+            Path: /count
       Policies:
         - AWSLambdaBasicExecutionRole
+        - DynamoDBCrudPolicy:
+            TableName: !Ref VisitorCountTable
       Environment:
         Variables:
-          TABLE_NAME: resume-visitor-count
+          TABLE_NAME: !Ref VisitorCountTable
 
   VisitorCountTable:
     Type: AWS::DynamoDB::Table
