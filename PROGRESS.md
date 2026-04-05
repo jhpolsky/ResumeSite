@@ -24,7 +24,7 @@ Reference: https://cloudresumechallenge.dev/docs/the-challenge/aws/
 | 8 | **Database (DynamoDB)** | ✅ Done | `resume-visitor-count` table defined in `backend/template.yaml`, PAY_PER_REQUEST billing |
 | 9 | **API (API Gateway + Lambda)** | ✅ Done | HttpApi defined in SAM template, CORS locked to `https://jhpolsky.com`, endpoint: `https://ej6k6nb4fe.execute-api.us-east-1.amazonaws.com/count` |
 | 10 | **Python (Lambda)** | ✅ Done | `backend/lambda_function.py` — atomic increment via boto3 update_item, Decimal→int cast, CORS header in response |
-| 11 | **Tests** | ⬜ Pending | `backend/tests/test_lambda.py` — pytest + moto |
+| 11 | **Tests** | ✅ Done | `backend/tests/test_lambda.py` — pytest + moto; `test_count_increments` verifies Lambda returns 200 and increments DynamoDB count |
 | 12 | **Infrastructure as Code (SAM)** | ✅ Done | `backend/template.yaml` — DynamoDB + Lambda + HttpApi + IAM; deployed via SAM to stack `resume-backend` in us-east-1; tags: `project=resume` via `samconfig.toml` |
 | 13 | **Source Control (Backend)** | ⬜ Pending | Separate GitHub repo for `backend/` |
 | 14 | **CI/CD — Backend** | ⬜ Pending | GitHub Actions: test → sam deploy on push to main |
@@ -48,6 +48,9 @@ Reference: https://cloudresumechallenge.dev/docs/the-challenge/aws/
 | 2026-04-05 | DynamoDB Decimal | DynamoDB returns numbers as Python `Decimal` type — must cast to `int` before `json.dumps()` or it throws `TypeError: Object of type Decimal is not JSON serializable` |
 | 2026-04-05 | DynamoDB inspect | To check live DynamoDB data: `aws dynamodb get-item --table-name resume-visitor-count --key '{"id": {"S": "visitors"}}' --region us-east-1`. Returns item with `"N"` (Number) type for count and `"S"` (String) for id. |
 | 2026-04-05 | Backend deploy workflow | Lambda change: `git push` → `sam build && sam deploy`. No CloudFront invalidation needed — CloudFront only caches frontend files, not API responses. |
+| 2026-04-05 | requirements split | `requirements.txt` is for Lambda production deps (empty — boto3 is pre-installed in Lambda runtime). `requirements-dev.txt` is for test/dev deps (`pytest`, `moto`, `boto3`). Keep them separate so SAM doesn't bundle test deps into the Lambda package. |
+| 2026-04-05 | TABLE_NAME env var in tests | `lambda_function.py` reads `TABLE_NAME` at import time — not inside the handler. When running pytest locally this env var doesn't exist, causing `KeyError`. Fix: set `os.environ['TABLE_NAME'] = 'resume-visitor-count'` in the test file before importing `lambda_handler`. |
+| 2026-04-05 | moto mock_aws | Use `@mock_aws` decorator from `moto` to intercept all boto3 calls in tests. Must `create_table` inside the test to create a fake DynamoDB table, then `put_item` to seed initial data before calling the handler. |
 | 2026-04-05 | Frontend deploy workflow | Frontend change: `git push` → `aws s3 cp <file> s3://jpolsky-resume/` → `aws cloudfront create-invalidation --distribution-id E12TJ8IYB8OQ13 --paths "/*"` |
 
 ---
