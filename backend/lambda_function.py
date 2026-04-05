@@ -18,5 +18,5 @@ def lambda_handler(event, context):
             'Access-Control-Allow-Origin': 'https://jhpolsky.com'
         },
         'statusCode': 200,
-        'body': json.dumps(response['Attributes']['count'])
+        'body': json.dumps(int(response['Attributes']['count']))
     }
