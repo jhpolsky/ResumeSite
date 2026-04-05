@@ -4,6 +4,7 @@ import os
 
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table(os.environ['TABLE_NAME'])
+ALLOWED_ORIGIN = os.environ.get('ALLOWED_ORIGIN')
 
 def lambda_handler(event, context):
     response = table.update_item(
@@ -15,7 +16,7 @@ def lambda_handler(event, context):
     )
     return {
         'headers': {
-            'Access-Control-Allow-Origin': 'https://jhpolsky.com',
+            'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
             'Access-Control-Allow-Methods': 'GET',
             'Access-Control-Allow-Headers': 'Content-Type'
         },

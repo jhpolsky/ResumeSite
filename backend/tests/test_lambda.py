@@ -2,7 +2,6 @@ import boto3
 from moto import mock_aws
 import json
 import os
-os.environ['TABLE_NAME'] = 'resume-visitor-count'
 from lambda_function import lambda_handler
 
 @mock_aws
@@ -31,7 +30,8 @@ def test_response_body_contains_count():
 
 @mock_aws
 def test_CORS_headers():
-    table = boto3.rousrce('dynamodb').create_table(
+    ALLOWED_ORIGIN = os.environ.get('ALLOWED_ORIGIN')
+    table = boto3.resource('dynamodb').create_table(
         TableName = 'resume-visitor-count',
         KeySchema = [{'AttributeName': 'id', 'KeyType': 'HASH'}],
         AttributeDefinitions = [{'AttributeName': 'id', 'AttributeType': 'S'}],
@@ -39,6 +39,6 @@ def test_CORS_headers():
     )
     table.put_item(Item={'id': 'visitors', 'count': 0})
     response = lambda_handler({}, {})
-    assert response['headers']['Access-Control-Allow-Origin'] == '*'
+    assert response['headers']['Access-Control-Allow-Origin'] == ALLOWED_ORIGIN
     assert response['headers']['Access-Control-Allow-Methods'] == 'GET'
     assert response['headers']['Access-Control-Allow-Headers'] == 'Content-Type'
