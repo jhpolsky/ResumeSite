@@ -46,6 +46,7 @@ Reference: https://cloudresumechallenge.dev/docs/the-challenge/aws/
 | 2026-04-04 | boto3 | Pre-installed in Lambda Python runtime — no `requirements.txt` needed for it |
 | 2026-04-04 | Separate repos | Frontend (ResumeSite) and backend stay in one repo until step 13 — CI/CD pipelines are set up after the code is finalized |
 | 2026-04-05 | DynamoDB Decimal | DynamoDB returns numbers as Python `Decimal` type — must cast to `int` before `json.dumps()` or it throws `TypeError: Object of type Decimal is not JSON serializable` |
+| 2026-04-05 | DynamoDB inspect | To check live DynamoDB data: `aws dynamodb get-item --table-name resume-visitor-count --key '{"id": {"S": "visitors"}}' --region us-east-1`. Returns item with `"N"` (Number) type for count and `"S"` (String) for id. |
 | 2026-04-05 | Backend deploy workflow | Lambda change: `git push` → `sam build && sam deploy`. No CloudFront invalidation needed — CloudFront only caches frontend files, not API responses. |
 | 2026-04-05 | Frontend deploy workflow | Frontend change: `git push` → `aws s3 cp <file> s3://jpolsky-resume/` → `aws cloudfront create-invalidation --distribution-id E12TJ8IYB8OQ13 --paths "/*"` |
 
