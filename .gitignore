@@ -2,3 +2,6 @@
 *.docx
 CLAUDE.md
 **/.aws-sam/*
+**/__pycache__/*
+**/venv/*
+**pytest_cache/*
