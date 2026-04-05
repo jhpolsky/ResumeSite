@@ -1,5 +1,4 @@
 *.pdf
 *.docx
-PROGRESS.md
 CLAUDE.md
-*/.aws-sam/*
+**/.aws-sam/*
