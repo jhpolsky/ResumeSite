@@ -1,15 +1,13 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: A simple AWS SAM template for a visitor counter using Lambda and DynamoDB.
-Tags:
-  project: resume
 Resources:
   VisitorCounterFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: lambda_function.lambda_handler
       Runtime: python3.12
-      CodeUri: ./
+      CodeUri: VisitorCounterFunction
       Events:
         VisitorCountApi:
           Type: HttpApi
@@ -17,21 +15,24 @@ Resources:
             Method: GET
             Path: /count
       Policies:
-        - AWSLambdaBasicExecutionRole
-        - DynamoDBCrudPolicy:
-            TableName: !Ref VisitorCountTable
+      - AWSLambdaBasicExecutionRole
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: VisitorCountTable
       Environment:
         Variables:
-          TABLE_NAME: !Ref VisitorCountTable
-
+          TABLE_NAME:
+            Ref: VisitorCountTable
+    Metadata:
+      SamResourceId: VisitorCounterFunction
   VisitorCountTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: resume-visitor-count
       AttributeDefinitions:
-        - AttributeName: id
-          AttributeType: S
+      - AttributeName: id
+        AttributeType: S
       KeySchema:
-        - AttributeName: id
-          KeyType: HASH
+      - AttributeName: id
+        KeyType: HASH
       BillingMode: PAY_PER_REQUEST
