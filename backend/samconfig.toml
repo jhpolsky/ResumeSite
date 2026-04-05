@@ -2,6 +2,7 @@ version = 0.1
 
 [default.deploy.parameters]
 stack_name = "resume-backend"
+tags = "project=resume"
 resolve_s3 = true
 s3_prefix = "resume-backend"
 region = "us-east-1"
