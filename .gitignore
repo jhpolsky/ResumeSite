@@ -1,4 +1,7 @@
 *.pdf
 *.docx
 CLAUDE.md
-**/.aws-sam/*
+**/.aws-sam/
+**/__pycache__/*
+**/venv/*
+**/.pytest_cache/*
