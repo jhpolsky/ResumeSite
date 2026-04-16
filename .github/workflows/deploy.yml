@@ -3,6 +3,11 @@ name: Frontend CI/CD
 on:
   push:
     branches: [master]
+    paths-ignore:
+      - "**.md"
+      - "**.pdf"
+      - "**.docx"
+      - ".gitattributes"
 
 jobs:
   deploy:
