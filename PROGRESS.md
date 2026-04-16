@@ -24,10 +24,10 @@ Reference: https://cloudresumechallenge.dev/docs/the-challenge/aws/
 | 8 | **Database (DynamoDB)** | ✅ Done | `resume-visitor-count` table defined in `backend/template.yaml`, PAY_PER_REQUEST billing |
 | 9 | **API (API Gateway + Lambda)** | ✅ Done | HttpApi defined in SAM template, CORS locked to `https://jhpolsky.com`, endpoint: `https://ej6k6nb4fe.execute-api.us-east-1.amazonaws.com/count` |
 | 10 | **Python (Lambda)** | ✅ Done | `backend/lambda_function.py` — atomic increment via boto3 update_item, Decimal→int cast, CORS header in response |
-| 11 | **Tests** | 🔄 In Progress | 3 tests passing: `test_count_increments` (status 200), `test_response_body_contains_count` (body == '1'), `test_CORS_headers` (origin/methods/headers). Remaining: increment-twice test, table-missing 500 test, body-is-integer test. |
+| 11 | **Tests** | ✅ Done | All 6 tests passing: `test_count_increments`, `test_count_increment_twice`, `test_response_body_contains_count`, `test_body_is_int`, `test_CORS_headers`, `test_table_missing`. Fixed by adding fake AWS credentials to `conftest.py` — moto requires them even though no real AWS calls are made. |
 | 12 | **Infrastructure as Code (SAM)** | ✅ Done | `backend/template.yaml` — DynamoDB + Lambda + HttpApi + IAM; deployed via SAM to stack `resume-backend` in us-east-1; tags: `project=resume` via `samconfig.toml` |
-| 13 | **Source Control (Backend)** | ⬜ Pending | Separate GitHub repo for `backend/` |
-| 14 | **CI/CD — Backend** | ⬜ Pending | GitHub Actions: test → sam deploy on push to main |
+| 13 | **Source Control (Backend)** | ✅ Done | Separate GitHub repo `ResumeBackend` created; `lambda_function.py`, `template.yaml`, `samconfig.toml`, `tests/`, `requirements-dev.txt` all moved there |
+| 14 | **CI/CD — Backend** | ✅ Done | `.github/workflows/deploy.yml` — runs pytest on every push; deploys via `sam build && sam deploy --no-confirm-changeset` on push to main using `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` GitHub secrets |
 | 15 | **CI/CD — Frontend** | ⬜ Pending | GitHub Actions: sync to S3 → invalidate CloudFront on push to main |
 | 16 | **Blog Post** | ⬜ Pending | Reflection post (dev.to, Medium, or personal blog) |
 | 17 | **React Migration** | ⬜ Future | Rebuild frontend as a React app with interactive elements (e.g. animated skill tags, expandable job sections, dark/light toggle). Wire up Google Docs → GitHub Actions webhook so edits in Docs auto-trigger a CI/CD redeploy. |
