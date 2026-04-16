@@ -28,7 +28,7 @@ Reference: https://cloudresumechallenge.dev/docs/the-challenge/aws/
 | 12 | **Infrastructure as Code (SAM)** | ✅ Done | `backend/template.yaml` — DynamoDB + Lambda + HttpApi + IAM; deployed via SAM to stack `resume-backend` in us-east-1; tags: `project=resume` via `samconfig.toml` |
 | 13 | **Source Control (Backend)** | ✅ Done | Separate GitHub repo `ResumeBackend` created; `lambda_function.py`, `template.yaml`, `samconfig.toml`, `tests/`, `requirements-dev.txt` all moved there |
 | 14 | **CI/CD — Backend** | ✅ Done | `.github/workflows/deploy.yml` — runs pytest on every push; deploys via `sam build && sam deploy --no-confirm-changeset` on push to main using `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` GitHub secrets |
-| 15 | **CI/CD — Frontend** | ⬜ Pending | GitHub Actions: sync to S3 → invalidate CloudFront on push to main |
+| 15 | **CI/CD — Frontend** | ✅ Done | `.github/workflows/deploy.yml` — on push to master: `aws s3 sync` (index.html, style.css, counter.js only) + `cloudfront create-invalidation` using GitHub Secrets |
 | 16 | **Blog Post** | ⬜ Pending | Reflection post (dev.to, Medium, or personal blog) |
 | 17 | **React Migration** | ⬜ Future | Rebuild frontend as a React app with interactive elements (e.g. animated skill tags, expandable job sections, dark/light toggle). Wire up Google Docs → GitHub Actions webhook so edits in Docs auto-trigger a CI/CD redeploy. |
 | 18 | **IAM Hardening** | ⬜ Future | (1) Replace `joseph` access keys with OIDC federation (GitHub Actions native AWS OIDC — no long-lived keys). (2) Create dedicated `github-actions-backend` and `github-actions-frontend` IAM users/roles scoped to only the permissions SAM/S3/CloudFront actually need. |
