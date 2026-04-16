@@ -31,6 +31,7 @@ Reference: https://cloudresumechallenge.dev/docs/the-challenge/aws/
 | 15 | **CI/CD — Frontend** | ⬜ Pending | GitHub Actions: sync to S3 → invalidate CloudFront on push to main |
 | 16 | **Blog Post** | ⬜ Pending | Reflection post (dev.to, Medium, or personal blog) |
 | 17 | **React Migration** | ⬜ Future | Rebuild frontend as a React app with interactive elements (e.g. animated skill tags, expandable job sections, dark/light toggle). Wire up Google Docs → GitHub Actions webhook so edits in Docs auto-trigger a CI/CD redeploy. |
+| 18 | **IAM Hardening** | ⬜ Future | (1) Replace `joseph` access keys with OIDC federation (GitHub Actions native AWS OIDC — no long-lived keys). (2) Create dedicated `github-actions-backend` and `github-actions-frontend` IAM users/roles scoped to only the permissions SAM/S3/CloudFront actually need. |
 
 ---
 
